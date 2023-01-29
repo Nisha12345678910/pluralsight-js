@@ -1,20 +1,23 @@
-#Test against the this version Node.js
+# Test against this version of Node.js
 environment:
   matrix:
-   # node.js
-  - nodejs_version: "14"
-  # scripts that run after cloning repository
+  # node.js
+  - nodejs_version: "16"
+
+# Install scripts. (runs after repo cloning)
 install:
-  # by default, all script lines are interpreted as batch
-   - ps: Install-Product node $env:nodejs_version
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm install
-   #run tests
-   -npm test
 
-  test_script:
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
   - node --version
   - npm --version
+  # run tests
+  - npm test
 
 # Don't actually build.
 build: off
