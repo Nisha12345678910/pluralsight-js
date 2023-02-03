@@ -1,121 +1,31 @@
 select * from
-vikassharma.bulk_guest_uploads	t1,
-vikassharma.checkins	t2,
-vikassharma.receipt_images	t3,
-vikassharma.accounts	t4,
-vikassharma.badges	t5,
-vikassharma.campaign_devices	t6,
-vikassharma.campaign_sets	t7,
-vikassharma.checkin_allocations	t8,
-vikassharma.checkin_credits	t9,
-vikassharma.checkin_failures	t10,
-vikassharma.feedbacks	t11,
-vikassharma.fraud_suspects	t12,
-vikassharma.gaming_achievements	t13,
-vikassharma.user_cards	t14,
-vikassharma.gift_cards	t15,
-vikassharma.gift_card_versions	t16,
-vikassharma.guest_game_play_codes	t17,
-vikassharma.invitations	t18,
-vikassharma.location_visits	t19,
-vikassharma.membership_level_histories	t20,
-vikassharma.notification_payloads	t21,
-vikassharma.payments	t22,
-vikassharma.payment_failures	t23,
-vikassharma.post_checkin_user_campaigns	t24,
-vikassharma.profile_answers	t25,
-vikassharma.receipt_stats	t26,
-vikassharma.recurring_rewards	t27,
-vikassharma.redemption_codes	t28,
-vikassharma.redemption_failures	t29,
-vikassharma.redemption_voids	t30,
-vikassharma.referrals	t31,
-vikassharma.rewards	t32,
-vikassharma.segment_custom_users	t33,
-vikassharma.scratch_plays	t34,
-vikassharma.session_tokens	t35,
-vikassharma.subscription_discounts	t36,
-vikassharma.survey_campaign_submissions	t37,
-vikassharma.user_agent_trackings	t38,
-vikassharma.user_bots	t39,
-vikassharma.user_consents	t40,
-vikassharma.user_coupon_redemptions	t41,
-vikassharma.user_devices	t42,
-vikassharma.user_external_identifiers	t43,
-vikassharma.user_favourite_locations	t44,
-vikassharma.user_sms_compliances	t45,
-vikassharma.user_transitions	t46,
-vikassharma.user_feature_enrollments	t47,
-vikassharma.user_notes	t48,
-vikassharma.user_relations	t49,
-vikassharma.user_surveys	t50,
-vikassharma.user_visits	t51,
-vikassharma.user_versions	t52,
-vikassharma.verifications	t53,
-vikassharma.bulk_guest_upload_connections	t54,
-vikassharma.discount_baskets	t55,
-vikassharma.discount_basket_items	t56,
-vikassharma.tips	t57,
-vikassharma.challenge_milestones	t58,
-vikassharma.reward_debits	t59,
-vikassharma.earnings	t60
-where t1.business_id=.27 and
-t2.business_id =27 and
-t3.business_id =27 and
-t4.business_id =27 and
-t5.business_id =27 and
-t6.business_id =27 and
-t7.business_id =27 and
-t8.business_id =27 and
-t9.business_id =27 and
-t10.business_id =27 and
-t11.business_id =27 and
-t12.business_id =27 and
-t13.business_id =27 and
-t14.business_id =27 and
-t15.business_id =27 and
-t16.business_id =27 and
-t17.business_id =27 and
-t18.business_id =27 and
-t19.business_id =27 and
-t20.business_id =27 and
-t21.business_id =27 and
-t22.business_id =27 and
-t23.business_id =27 and
-t24.business_id =27 and
-t25.business_id =27 and
-t26.business_id =27 and
-t27.business_id =27 and
-t28.business_id =27 and
-t29.business_id =27 and
-t30.business_id =27 and
-t31.business_id =27 and
-t32.business_id =27 and
-t33.business_id =27 and
-t34.business_id =27 and
-t35.business_id =27 and
-t36.business_id =27 and
-t37.business_id =27 and
-t38.business_id =27 and
-t39.business_id =27 and
-t40.business_id =27 and
-t41.business_id =27 and
-t42.business_id =27 and
-t43.business_id =27 and
-t44.business_id =27 and
-t45.business_id =27 and
-t46.business_id =27 and
-t47.business_id =27 and
-t48.business_id =27 and
-t49.business_id =27 and
-t50.business_id =27 and
-t51.business_id =27 and
-t52.business_id =27 and
-t53.business_id =27 and
-t54.business_id =27 and
-t55.business_id =27 and
-t56.business_id =27 and
-t57.business_id =27 and
-t58.business_id =27 and
-t59.business_id =27 and
-t60.business_id =27;
+vikassharma.bulk_guest_uploads	t1 inner join vikassharma.checkins t2  on t1.business_id =t2.business_id 
+inner join vikassharma.receipt_images t3 inner join vikassharma.accounts t4 on t3.business_id =t4.business_id 
+inner join vikassharma.badges	t5 inner join vikassharma.campaign_devices t6	on t5.business_id =t6.business_id  
+inner join vikassharma.campaign_sets	t7 inner join vikassharma.checkin_allocations 	t8 on t7.business_id =t8.business_id 
+inner join vikassharma.checkin_credits	t9 inner join vikassharma.checkin_failures	t10 on t9.business_id =t10.business_id  
+inner join vikassharma.feedbacks	t11 inner join vikassharma.fraud_suspects	t12 on t11.business_id =t12.business_id  
+inner join vikassharma.gaming_achievements	t13 inner join vikassharma.user_cards	t14 on t13.business_id =t14.business_id  
+inner join vikassharma.gift_cards	t15 inner join vikassharma.gift_card_versions	t16 on t15.business_id =t16.business_id  
+inner join vikassharma.guest_game_play_codes	t17 inner join vikassharma.invitations	t18 on t17.business_id =t18.business_id  
+inner join vikassharma.location_visits	t19 inner join vikassharma.membership_level_histories	t20 on t19.business_id =t20.business_id  
+inner join vikassharma.notification_payloads	t21 inner join vikassharma.payments	t22 on t21.business_id =t22.business_id  
+inner join vikassharma.payment_failures	t23 inner join vikassharma.post_checkin_user_campaigns	t24 on t23.business_id =t24.business_id  
+inner join vikassharma.profile_answers	t25 inner join vikassharma.receipt_stats	t26 on t25.business_id =t26.business_id  
+inner join vikassharma.recurring_rewards	t27 inner join vikassharma.redemption_codes	t28 on t27.business_id =t28.business_id  
+inner join vikassharma.redemption_failures	t29 inner join vikassharma.redemption_voids	t30 on t29.business_id =t30.business_id  
+inner join vikassharma.referrals	t31 inner join vikassharma.rewards	t32  on t31.business_id =t32.business_id  
+inner join vikassharma.segment_custom_users	t33 inner join vikassharma.scratch_plays	t34 on t33.business_id =t34.business_id  
+inner join vikassharma.session_tokens	t35 inner join vikassharma.subscription_discounts	t36 on t35.business_id =t36.business_id  
+inner join vikassharma.survey_campaign_submissions	t37 inner join vikassharma.user_agent_trackings	t38 on t37.business_id =t38.business_id  
+inner join vikassharma.user_bots	t39 inner join vikassharma.user_consents	t40 on t39.business_id =t40.business_id  
+inner join vikassharma.user_coupon_redemptions	t41 inner join vikassharma.user_devices	t42 on t41.business_id =t42.business_id  
+inner join vikassharma.user_external_identifiers	t43 inner join vikassharma.user_favourite_locations	t44 on t43.business_id =t44.business_id  
+inner join vikassharma.user_sms_compliances	t45 inner join vikassharma.user_transitions	t46 on t45.business_id =t46.business_id  
+inner join vikassharma.user_feature_enrollments	t47 inner join vikassharma.user_notes	t48 on t47.business_id =t48.business_id  
+inner join vikassharma.user_relations	t49 inner join vikassharma.user_surveys	t50 on t49.business_id =t50.business_id  
+inner join vikassharma.user_visits	t51 inner join vikassharma.user_versions	t52 on t51.business_id =t52.business_id  
+inner join vikassharma.verifications	t53 inner join vikassharma.bulk_guest_upload_connections	t54 on t53.business_id =t54.business_id  
+inner join vikassharma.discount_baskets	t55 inner join vikassharma.discount_basket_items	t56 on t55.business_id =t56.business_id  
+inner join vikassharma.tips	t57 inner join vikassharma.challenge_milestones	t58 on t57.business_id =t58.business_id  
+inner join vikassharma.reward_debits	t59 inner join vikassharma.earnings	t60 on t59.business_id =t60.business_id  
