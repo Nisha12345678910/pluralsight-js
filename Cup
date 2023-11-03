@@ -1,0 +1,99 @@
+Test Suite: Cup and Saucer
+Test Case 1: Cup Capacity Test
+Description: Verify that the cup is able to contain the specified amount of hot coffee.
+Test Steps:
+1. Fill the cup with the specified amount of hot coffee.
+2. Verify that the coffee does not overflow from the cup.
+Expected Result: The cup is able to contain the specified amount of hot coffee without overflowing.
+
+Test Case 2: Cup Heat Resistance Test
+Description: Verify that the cup is able to withstand the heat of hot coffee without getting damaged.
+Test Steps:
+1. Fill the cup with hot coffee.
+2. Allow the coffee to sit in the cup for the specified duration.
+3. Touch the cup to check for any signs of damage or deformation.
+Expected Result: The cup remains intact and does not show any signs of damage or deformation after being filled with hot coffee.
+
+Test Case 3: Saucer Weight Holding Test
+Description: Verify that the saucer is able to hold the weight of the cup.
+Test Steps:
+1. Place the cup filled with hot coffee on the saucer.
+2. Apply pressure on the cup to simulate the weight.
+3. Check if the saucer remains stable and does not break or crack.
+Expected Result: The saucer is able to hold the weight of the cup without breaking or cracking.
+
+Test Case 4: Saucer Stability Test
+Description: Verify that the saucer provides stable support to the cup.
+Test Steps:
+1. Place the cup filled with hot coffee on the saucer.
+2. Gently tilt the cup in different directions.
+3. Observe if the cup remains stable on the saucer without tipping over.
+Expected Result: The saucer provides stable support to the cup and prevents it from tipping over.
+
+Test Case 5: Cup and Saucer Compatibility Test
+Description: Verify that the cup and saucer are compatible and fit together properly.
+Test Steps:
+1. Place the cup on the saucer.
+2. Check if the cup sits properly on the saucer without any wobbling or instability.
+Expected Result: The cup fits securely on the saucer without any wobbling or instability.
+
+Test Case 6: Cup and Saucer Material Durability Test
+Description: Verify that the cup and saucer materials are durable and do not get damaged easily.
+Test Steps:
+1. Drop the cup and saucer from a specified height.
+2. Inspect the cup and saucer for any signs of damage or breakage.
+Expected Result: The cup and saucer materials are durable and do not get damaged easily when dropped from the specified height.
+
+Test Case 7: Cup and Saucer Cleaning Test
+Description: Verify that the cup and saucer are easy to clean and maintain.
+Test Steps:
+1. Fill the cup with hot coffee.
+2. Use a cleaning agent and a sponge to clean the cup and saucer.
+3. Rinse the cup and saucer with water.
+4. Check if the cup and saucer are clean and free from any stains or residue.
+Expected Result: The cup and saucer are easy to clean and maintain, and can be effectively cleaned without leaving any stains or residue.
+
+Diagram:
+```
+          +-------------------+
+          |                   |
+          |       Cup         |
+          |                   |
+          +-------------------+
+                   |
+                   |
+                   |
+                   |
+                   |
+          +-------------------+
+          |                   |
+          |      Saucer       |
+          |                   |
+          +-------------------+
+```
+
+Q2. During testing, you find out that the coffee spills off when the cup is placed on the saucer. What do you think possibly causes this? Would you change any of your tests from before? If so, how?
+
+Possible Cause: The saucer may not have a sufficient rim or lip to prevent the coffee from spilling off when the cup is placed on it. The saucer may not have a flat surface, causing instability and tipping of the cup.
+
+Test Case Modification:
+Test Case 4: Saucer Stability Test
+Description: Verify that the saucer provides stable support to the cup and prevents coffee spills.
+Test Steps:
+1. Place the cup filled with hot coffee on the saucer.
+2. Gently tilt the cup in different directions.
+3. Observe if the cup remains stable on the saucer without tipping over and without any coffee spills.
+Expected Result: The saucer provides stable support to the cup, prevents tipping over, and avoids coffee spills.
+
+Q3. To avoid spills, the cup and saucer development teams decided they should communicate over HTTP. Describe the necessary communication details of the cup sending a message over HTTP to the saucer.
+
+To enable communication between the cup and saucer over HTTP, the following details are necessary:
+
+1. Endpoint: The saucer should have an HTTP endpoint or URL to which the cup can send messages.
+2. HTTP Method: The cup should use the appropriate HTTP method (e.g., POST, PUT, or PATCH) to send a message to the saucer.
+3. Message Format: The cup should send the message in a specific format (e.g., JSON or XML) that the saucer can understand.
+4. Message Content: The cup should include the necessary information in the message content, such as the status of the cup (e.g., full or empty) or any specific actions required by the saucer.
+5. Authentication: If required, the cup may need to provide authentication credentials (e.g., API key or token) to access the saucer's HTTP endpoint.
+6. Error Handling: The cup should handle any potential errors or failures that may occur during the HTTP communication, such as timeouts or connection issues.
+
+Overall, the cup can send an HTTP request to the saucer's endpoint, including the necessary information in the message content, and handle any potential errors or failures that may occur during the communication.
