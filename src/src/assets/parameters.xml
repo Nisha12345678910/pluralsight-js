@@ -1,0 +1,15 @@
+<parameters>
+  <parameter name="rootPath" description="Parameter for rootPath" defaultValue="" >
+    <parameterValidation kind="AllowEmpty" />
+    <parameterEntry kind="TextFile" scope="..\\main.*.js$" match="{rootPath}"  />
+  </parameter>
+  <parameter name="apiHost" description="Parameter for apiHost" defaultValue="" >
+    <parameterValidation kind="AllowEmpty" />
+    <parameterEntry kind="TextFile" scope="..\\main.*.js$" match="{apiHost}"  />
+  </parameter>
+  <parameter name="baseUrl" description="Parameter for baseUrl" defaultValue="">
+    <parameterValidation kind="AllowEmpty" />
+        <parameterEntry kind="TextFile" scope="..\\index.html$" match="{baseUrl}" />
+    <parameterEntry kind="XmlFile" scope="..\\web.config$" match="//configuration/system.webServer/rewrite/rules/rule[@name='AngularJS Routes']/action/@url" />
+  </parameter>
+</parameters>

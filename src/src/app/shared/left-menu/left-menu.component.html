@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" class="sidenav" [(opened)]="isSidenavOpen">
+      <mat-toolbar color="primary" class="gray-toolbar"> <button mat-icon-button  (click)="toggleSidenav(sidenav)">        
+        <mat-icon>close</mat-icon>
+      </button></mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/client-info" (click)="sidenav.close()">Client Info</a>
+        <a mat-list-item (click)="downloadReportingSchedule();sidenav.close()">Download Reporting<br/>Schedule</a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="toggleSidenav(sidenav)">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div style="width: 100%;">
+          <app-header/>
+        </div>
+      </mat-toolbar>
+  
+      <div class="content">
+        <div *ngIf="isLoading1" class="loading-indicator">
+          <p>Downoading... Please wait.</p>
+        </div> 
+        <router-outlet ></router-outlet>  
+        <!-- <router-outlet *ngIf="!isLoading1; else loading1"></router-outlet>
+        <ng-template #loading1>
+        <div class="loading-indicator">
+          <mat-spinner></mat-spinner>
+          <p>Downoading... Please wait.</p>
+        </div>   
+      </ng-template> -->
+      </div>
+    
+     <footer><app-footer ></app-footer></footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

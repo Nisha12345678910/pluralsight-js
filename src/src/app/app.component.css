@@ -1,0 +1,15 @@
+  .sidenav {
+    width: 250px; /* Width of the side menu */
+  }
+  
+  .spacer {
+    flex: 1; /* This will push the buttons to the right */
+  }
+  
+  .content {
+    padding: 16px; /* Padding for the content area */
+  }
+  .mat-toolbar.mat-primary {
+    --mat-toolbar-container-background-color: #e7e7e7;
+    --mat-toolbar-container-text-color: #3f51b5;
+  }

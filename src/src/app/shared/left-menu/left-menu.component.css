@@ -1,0 +1,22 @@
+.sidenav {
+    width: 250px; /* Width of the side menu */
+  }
+
+  .mat-toolbar.mat-primary {
+    --mat-toolbar-container-background-color: #e7e7e7;
+    --mat-toolbar-container-text-color: #002C77 ;
+  }
+
+.content {
+    padding: 16px; 
+    min-height: calc(100vh - 160px) /* Adjust based on footer height */
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgrey;
+  height: 10%; /* Full height of the content area */
+}

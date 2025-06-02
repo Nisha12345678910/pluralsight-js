@@ -1,0 +1,637 @@
+<div class="content">
+    <button mat-raised-button color="primary" (click)="back()">Go Back</button>
+  </div>
+  <form [formGroup]="createClientForm.ClientForm">
+
+  <mat-tab-group >
+    <mat-tab label="Client Information">
+      <ng-template matTabContent>
+        <mat-card *ngIf="!isLoading; else loading">
+          <mat-card-title #scroll>View Client Information</mat-card-title>
+          <mat-card-content>
+            <mat-card>
+              <mat-card-content>
+                <div formGroupName="clientInfoDto">
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" formControlName="name" readonly>
+                  </mat-form-field>
+                 <span formGroupName="clientStatus">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Status</mat-label>
+                      <input matInput type="text" formControlName="status" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="product">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Product</mat-label>
+                      <input matInput type="text" formControlName="productName" readonly>
+                    </mat-form-field>
+                  </span>
+
+                  
+                <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Terminating Date</mat-label>                 
+                    <input matInput formControlName="terminatingDate" [matDatepicker]="terminatingPicker" readonly>
+                    <mat-datepicker #terminatingPicker readonly></mat-datepicker>        
+                  </mat-form-field>
+  
+                <span formGroupName="consultant">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Consultant</mat-label>
+                      <input matInput type="text" formControlName="firstName"  readonly>
+                    </mat-form-field>
+                  </span>
+  
+                 <span formGroupName="accountManager">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Account Manager</mat-label>
+                      <input matInput type="text" formControlName="firstName"  readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="access">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Access: SSO/PSSW</mat-label>
+                      <input matInput type="text" formControlName="accessType"  readonly>
+                    </mat-form-field>
+                  </span>
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Contract Renewal Date</mat-label>
+                    <input matInput formControlName="contractRenewalDate" [matDatepicker]="contractRenewalDatePicker" readonly>
+                    <mat-datepicker #contractRenewalDatePicker readonly></mat-datepicker> 
+                  </mat-form-field>
+                  <span formGroupName="relationshipManager">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Relationship Manager</mat-label>
+                      <input matInput type="text" formControlName="firstName"  readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="hrisSystem">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>HRIS System</mat-label>
+                      <input matInput type="text" formControlName="systemName"  readonly>
+                    </mat-form-field>
+                  </span>
+                     <span formGroupName="insurer">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>Benefits Carrier</mat-label>
+                      <input matInput type="text" formControlName="name"  readonly>
+                    </mat-form-field>
+                  </span>
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Plan Renewal Date</mat-label>
+                    <input matInput formControlName="planRenewalDate" [matDatepicker]="planRenewalDatePicker" readonly>
+                    <mat-datepicker #planRenewalDatePicker readonly></mat-datepicker> 
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Go-live Date</mat-label>
+                    <input matInput formControlName="goLiveDate" [matDatepicker]="clGoLiveDateplanPicker" readonly>
+                    <mat-datepicker #clGoLiveDateplanPicker readonly></mat-datepicker>                   </mat-form-field>
+                <span formGroupName="eapEmployerProvided">
+                    <mat-form-field appearance="fill" class="no-section-margin">
+                      <mat-label>EAP Employer Provided</mat-label>
+                      <input matInput type="text" formControlName="providerName"  readonly>
+                    </mat-form-field>
+                  </span>
+                  <br />
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>Mercer 365 URL</mat-label>
+                    <input matInput type="text" formControlName="mercer365URL" readonly>
+                  </mat-form-field>
+  
+                      <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>HRIS Transmission</mat-label>
+                    <input matInput type="text" formControlName="hrisTransmission" readonly>
+                  </mat-form-field>
+  
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>HRIS Frequency</mat-label>
+                    <input matInput type="text" formControlName="hrisFrequency" readonly>
+                  </mat-form-field>
+  
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>Additional File Loads</mat-label>
+                    <input matInput type="text" formControlName="additionalFileLoads" readonly>
+                  </mat-form-field>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>PEPM</mat-label>
+                      <input matInput type="text" formControlName="pepm" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Inflation Clause</mat-label>
+                      <mat-select formControlName="inflationClause" readonly>
+                        <mat-option [value]="1">Yes</mat-option>
+                        <mat-option [value]="2">No</mat-option>
+                        <mat-option [value]="3">N/A</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Calendar of Events</mat-label>
+                      <mat-select formControlName="wellnessCalendarOfEvents" readonly>
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Measure Your Health</mat-label>
+                      <input matInput type="text" formControlName="measureYourHealth" readonly>
+                    </mat-form-field>
+                    <span formGroupName="virtualCare">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Virtual Care</mat-label>
+                        <input matInput type="text" formControlName="careProvider" readonly>
+                      </mat-form-field>
+                    </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>MSO</mat-label>
+                      <input matInput type="text" formControlName="mso" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Care Quest</mat-label>
+                      <input matInput type="text" formControlName="careQuest" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Health Coaching</mat-label>
+                      <input matInput type="text" formControlName="healthCoaching" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Get Fit</mat-label>
+                      <input matInput type="text" formControlName="getFit" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Improve Your Sleep</mat-label>
+                      <input matInput type="text" formControlName="improveYourSleep" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Nutrition Profile</mat-label>
+                      <input matInput type="text" formControlName="nutritionProfile" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Drug Profile</mat-label>
+                      <input matInput type="text" formControlName="drugProfile" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Virtual Physiotherapy</mat-label>
+                      <input matInput type="text" formControlName="virtualPhysiotherapy" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Functional Fitness</mat-label>
+                      <input matInput type="text" formControlName="functionalFitness" readonly>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Find A Therapist</mat-label>
+                      <input matInput type="text" formControlName="findATherapist" readonly>
+                    </mat-form-field>
+                    <span formGroupName="digitalMentalHealthTherapy">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Digital Mental Health Therapy</mat-label>
+                        <input matInput type="text" formControlName="providerName" readonly>
+                      </mat-form-field>
+                    </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>EAP Portal Provider</mat-label>
+                      <input matInput type="text" formControlName="eapPortalProvider" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Improve Your Sleep EAP</mat-label>
+                      <input matInput type="text" formControlName="improveYourSleepEAP" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Free Resources to Help</mat-label>
+                      <input matInput type="text" formControlName="freeResourcesToHelp" readonly>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Credit Counselling</mat-label>
+                      <input matInput type="text" formControlName="creditCounselling" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Home and Auto Marsh</mat-label>
+                      <input matInput type="text" formControlName="homeAndAutoMarsh" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Home and Auto Employer Provided</mat-label>
+                      <input matInput type="text" formControlName="homeAndAutoEmployerProvided" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Will Support</mat-label>
+                      <input matInput type="text" formControlName="willSupport" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Pet Insurance</mat-label>
+                      <input matInput type="text" formControlName="petInsurance" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Retiree Insurance</mat-label>
+                      <input matInput type="text" formControlName="retireeInsurance" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Discounts</mat-label>
+                      <input matInput type="text" formControlName="discounts" readonly>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Vetster</mat-label>
+                      <mat-select formControlName="vetster" readonly>
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Tutoring</mat-label>
+                      <input matInput type="text" formControlName="tutoring" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Giving Back</mat-label>
+                      <input matInput type="text" formControlName="givingBack" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Caregiving</mat-label>
+                      <input matInput type="text" formControlName="caregiving" readonly>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 1</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering1" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 2</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering2" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 3</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering3" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 4</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering4" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 5</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering5" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 6</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering6" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 7</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering7" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet</mat-label>
+                      <input matInput type="text" formControlName="wellnessWallet" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet Carryover</mat-label>
+                      <input matInput type="text" formControlName="wellnessWalletCarryover" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="section">
+                    <span formGroupName="payrollProcessingFrequency">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Payroll Processing Frequency</mat-label>
+                        <input matInput type="text" formControlName="frequency" readonly>
+                      </mat-form-field>
+                    </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Quarterly Administrator Access Review</mat-label>
+                      <input matInput type="text" formControlName="quarterlyAdministratorAccessReview" readonly>
+                    </mat-form-field>
+                    <span formGroupName="payrollCalendar">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Payroll Calendar Update</mat-label>
+                        <input matInput type="text" formControlName="calendarName" readonly>
+                      </mat-form-field>
+                    </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>SA Toolkit Update</mat-label>
+                      <input matInput type="text" formControlName="saToolkitUpdate" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Campaign Renewal</mat-label>
+                      <input matInput type="text" formControlName="wellnessCampaignRenewal" readonly>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet Reset Reload</mat-label>
+                      <input matInput type="text" formControlName="wellnessWalletResetReload" readonly>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Allowed to communicate directly with employees via the portal?</mat-label>
+                      <mat-select formControlName="allowedToCommunicateDirectly" readonly>
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill" class="comment-field">
+                      <mat-label>Comments/Notes</mat-label>
+                      <textarea matInput formControlName="commentsNotes" rows="4" readonly></textarea>
+                    </mat-form-field>
+                  </div> 
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+  
+    <mat-tab label="Mailing">
+      <ng-template matTabContent>
+        <mat-card *ngIf="!isLoading; else loading">
+          <mat-card-title *ngIf="dataSource.data.length != 0">View Mailing Information</mat-card-title>
+          <mat-card-content>
+            <table *ngIf="dataSource.data.length != 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="contactName">
+                <th mat-header-cell *matHeaderCellDef>Contact Name</th>
+                <td mat-cell *matCellDef="let mail"> {{ mail.contactName || "N/A" }} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="emailAddress">
+                <th mat-header-cell *matHeaderCellDef>Email Address</th>
+                <td mat-cell *matCellDef="let mail"> {{ mail.emailAddress || "N/A" }} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="product">
+                <th mat-header-cell *matHeaderCellDef>Product</th>
+                <td mat-cell *matCellDef="let mail"> {{ mail.product ==1? 'Standard' : mail.product ==2 ? 'Lite' : 'N/A' }} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="preferredLanguage">
+                <th mat-header-cell *matHeaderCellDef>Language</th>
+                <td mat-cell *matCellDef="let mail"> {{ mail.preferredLanguage==1 ? 'English' : mail.language ==2 ? 'French' : "N/A" }} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="isOnMaternityLeave">
+                <th mat-header-cell *matHeaderCellDef>On Maternity Leave</th>
+                <td mat-cell *matCellDef="let mail"> {{ mail.isOnMaternityLeave ? "Yes" : mail.isOnMaternityLeave === false ? "No" : "N/A" }} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedMailingColumns"></tr>
+              <tr mat-row *matRowDef="let mail; columns: displayedMailingColumns;"></tr>
+            </table>
+            <div class="content" style="background-color: lightgray;" *ngIf="dataSource.data.length==0">
+                No Mailing Found...
+               </div>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+  
+    <mat-tab label="Schedule">
+      <ng-template matTabContent>
+        <mat-card *ngIf="!isLoading; else loading">
+          <mat-card-title #scroll>View Schedule Information</mat-card-title>
+          <mat-card-content>
+            <mat-card>
+              <mat-card-content>
+                <div formGroupName="scheduleDto">
+                  <span formGroupName="accountManager">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Account Manager</mat-label>
+                      <input matInput type="text" formControlName="firstName"  readonly>
+                    </mat-form-field>
+                  </span>
+  
+                  <mat-form-field appearance="fill">
+                    <mat-label>Go-Live Date</mat-label>
+                    <input matInput formControlName="goLiveDate"  [matDatepicker]="scgoLiveDatePicker" readonly>
+                    <mat-datepicker #scgoLiveDatePicker readonly></mat-datepicker> 
+                  </mat-form-field>
+                
+                  <mat-form-field appearance="fill">
+                    <mat-label>Cadence</mat-label>
+                    <mat-select formControlName="cadence"  readonly>
+                      <mat-option [value]="1">Annual Aggregate Report</mat-option>
+                      <mat-option [value]="2">Semi-Annual</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 <mat-form-field appearance="fill">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="product" readonly>
+                      <mat-option [value]="1">Standard</mat-option>
+                      <mat-option [value]="2">Lite</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <span formGroupName="januaryCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>January</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="februaryCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>February</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="marchCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>March</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="aprilCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>April</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="mayCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>May</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="juneCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>June</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="julyCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>July</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="augustCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>August</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="septemberCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>September</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="octoberCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>October</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="novemberCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>November</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                  <span formGroupName="decemberCalenderType">
+                    <mat-form-field appearance="fill">
+                      <mat-label>December</mat-label>
+                      <input matInput formControlName="calenderType" readonly>
+                    </mat-form-field>
+                  </span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+  
+    <mat-tab label="Inflation Clause">
+      <ng-template matTabContent>
+        <mat-card *ngIf="!isLoading; else loading">
+          <mat-card-title #scroll>View Schedule Information</mat-card-title>
+          <mat-card-content>
+            <mat-card>
+              <mat-card-content>
+                <div formGroupName="inflationClauseDto">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Vendor Name</mat-label>
+                    <input matInput type="text" formControlName="vendorName" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Vendor Cost ($)</mat-label>
+                    <input matInput formControlName="vendorCost" type="number" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Inflation Clauses</mat-label>
+                    <mat-select formControlName="isInflationClause" readonly>
+                      <mat-option [value]="true">Yes</mat-option>
+                      <mat-option [value]="false">No</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Clause</mat-label>
+                    <input matInput type="text" formControlName="clause" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Effective Date of 1st Application</mat-label>
+                    <input matInput formControlName="effectiveDate1" [matDatepicker]="effcetiveplanPicker1">
+                    <mat-datepicker #effcetiveplanPicker1 readonly></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Date of 2nd Application</mat-label>
+                    <input matInput formControlName="effectiveDate2" [matDatepicker]="effcetiveplanPicker2" readonly>
+                    <mat-datepicker #effcetiveplanPicker2 readonly></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Date of 3rd Application</mat-label>
+                    <input matInput formControlName="effectiveDate3" [matDatepicker]="effcetiveplanPicker3" readonly>
+                    <mat-datepicker #effcetiveplanPicker3 readonly></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Notice Period</mat-label>
+                    <mat-select formControlName="noticePeriod" readonly>
+                      <mat-option [value]="1">30 days</mat-option>
+                      <mat-option [value]="2">90 days</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Old Monthly Flat Amount ($)</mat-label>
+                    <input matInput formControlName="oldMonthlyFlatAmount" type="number" readonly>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Old PEPM ($)</mat-label>
+                    <input matInput formControlName="oldPEPM" type="number" readonly>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>New Flat Amount ($)</mat-label>
+                    <input matInput formControlName="newFlatAmount" type="number" readonly>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>New PEPM ($)</mat-label>
+                    <input matInput formControlName="newPEPM" type="number" readonly>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Definition</mat-label>
+                    <textarea matInput formControlName="definition" rows="4" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+  </form>
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading..</p>
+    </div>
+  </ng-template>

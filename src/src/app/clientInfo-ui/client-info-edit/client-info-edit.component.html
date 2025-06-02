@@ -1,0 +1,800 @@
+<div class="content">
+    <button mat-raised-button color="primary" (click)="back()">Go Back</button>
+  </div>
+  <form *ngIf="!isLoading; else loading" [formGroup]="createClientForm.ClientForm" (ngSubmit)="updateClient()">
+    <mat-tab-group [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Client Information">
+        <ng-template matTabContent>
+          <mat-card >
+            <mat-card-title #scroll>Edit Client Information</mat-card-title>
+            <mat-card-content>
+              <mat-card>
+                <mat-card-content>
+                  <div formGroupName="clientInfoDto">
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" formControlName="name" name="clientInfoDto.name" required>
+                   </mat-form-field>
+                  <span formGroupName="clientStatus">
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="clientStatusId" name="clientInfoDto.clientStatus" required>
+                      <mat-option *ngFor="let status of clientInfoDropDown.clientStatuses" [value]="status.clientStatusId">
+                        {{ status.status }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="product">
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="productId">
+                      <mat-option *ngFor="let product of clientInfoDropDown.products" [value]="product.productId">
+                        {{ product.productName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Terminating Date</mat-label>
+                    <input matInput formControlName="terminatingDate" [matDatepicker]="terminatingPicker">
+                    <mat-datepicker-toggle matSuffix [for]="terminatingPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #terminatingPicker></mat-datepicker>
+                  </mat-form-field>
+                  
+                  <span formGroupName="consultant">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Consultant</mat-label>
+                    <mat-select formControlName="userId">
+                      <mat-option *ngFor="let consultant of clientInfoDropDown.users" [value]="consultant.userId">
+                        {{ consultant.firstName + ' ' + consultant.lastName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+  
+                  <span formGroupName="accountManager">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Account Manager</mat-label>
+                    <mat-select formControlName="userId">
+                      <mat-option *ngFor="let user of clientInfoDropDown.users" [value]="user.userId">
+                        {{ user.firstName + ' ' + user.lastName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="access">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Access: SSO/PSSW</mat-label>
+                    <mat-select formControlName="accessId">
+                      <mat-option *ngFor="let access of clientInfoDropDown.accesses" [value]="access.accessId">
+                        {{ access.accessType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 </span>
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Contract Renewal Date</mat-label>
+                    <input matInput formControlName="contractRenewalDate" [matDatepicker]="contractRenewalDatePicker">
+                    <mat-datepicker-toggle matSuffix [for]="contractRenewalDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #contractRenewalDatePicker></mat-datepicker>
+                  </mat-form-field>
+                  <span formGroupName="relationshipManager">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Relationship Manager</mat-label>
+                    <mat-select formControlName="userId">
+                      <mat-option *ngFor="let user of clientInfoDropDown.users" [value]="user.userId">
+                        {{ user.firstName + ' ' + user.lastName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="hrisSystem">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>HRIS System</mat-label>
+                    <mat-select formControlName="hrisSystemId">
+                      <mat-option *ngFor="let hris of clientInfoDropDown.hrisSystems" [value]="hris.hrisSystemId">
+                        {{ hris.systemName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="insurer">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Benefits Carrier</mat-label>
+                    <mat-select formControlName="insurerId">
+                      <mat-option *ngFor="let insurer of clientInfoDropDown.insurers" [value]="insurer.insurerId">
+                        {{ insurer.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 </span>
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Plan Renewal Date</mat-label>
+                    <input matInput formControlName="planRenewalDate" [matDatepicker]="planRenewalDatePicker">
+                    <mat-datepicker-toggle matSuffix [for]="planRenewalDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #planRenewalDatePicker></mat-datepicker>
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>Go-live Date</mat-label>
+                    <input matInput formControlName="goLiveDate" [matDatepicker]="clGoLiveDateplanPicker">
+                    <mat-datepicker-toggle matSuffix [for]="clGoLiveDateplanPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #clGoLiveDateplanPicker></mat-datepicker>
+                  </mat-form-field>
+                  <span formGroupName="eapEmployerProvided">                
+                  <mat-form-field appearance="fill" class="no-section-margin">
+                    <mat-label>EAP Employer Provided</mat-label>
+                    <mat-select formControlName="eapEmployerProvidedId">
+                      <mat-option *ngFor="let provider of clientInfoDropDown.eapEmployerProvideds" [value]="provider.eapEmployerProvidedId">
+                        {{ provider.providerName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                 </span>
+                  <br />
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>Mercer 365 URL</mat-label>
+                    <input matInput type="text" formControlName="mercer365URL">
+                  </mat-form-field>
+  
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>HRIS Transmission</mat-label>
+                    <input matInput type="text" formControlName="hrisTransmission">
+                  </mat-form-field>
+  
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>HRIS Frequency</mat-label>
+                    <input matInput type="text" formControlName="hrisFrequency">
+                  </mat-form-field>
+  
+                  <mat-form-field class="inputText-field" appearance="fill">
+                    <mat-label>Additional File Loads</mat-label>
+                    <input matInput type="text" formControlName="additionalFileLoads">
+                  </mat-form-field>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>PEPM</mat-label>
+                      <input matInput type="text" formControlName="pepm">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Inflation Clause</mat-label>
+                      <mat-select formControlName="inflationClause">
+                        <mat-option [value]="1">Yes</mat-option>
+                        <mat-option [value]="2">No</mat-option>
+                        <mat-option [value]="3">N/A</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Calendar of Events</mat-label>
+                      <mat-select formControlName="wellnessCalendarOfEvents">
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Measure Your Health</mat-label>
+                      <input matInput type="text" formControlName="measureYourHealth">
+                    </mat-form-field>
+                    <span formGroupName="virtualCare">                
+                    <mat-form-field appearance="fill">
+                      <mat-label>Virtual Care</mat-label>
+                      <mat-select formControlName="virtualCareId">
+                        <mat-option *ngFor="let care of clientInfoDropDown.virtualCares" [value]="care.virtualCareId">
+                          {{ care.careProvider }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+               </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>MSO</mat-label>
+                      <input matInput type="text" formControlName="mso">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Care Quest</mat-label>
+                      <input matInput type="text" formControlName="careQuest">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Health Coaching</mat-label>
+                      <input matInput type="text" formControlName="healthCoaching">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Get Fit</mat-label>
+                      <input matInput type="text" formControlName="getFit">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Improve Your Sleep</mat-label>
+                      <input matInput type="text" formControlName="improveYourSleep">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Nutrition Profile</mat-label>
+                      <input matInput type="text" formControlName="nutritionProfile">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Drug Profile</mat-label>
+                      <input matInput type="text" formControlName="drugProfile">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Virtual Physiotherapy</mat-label>
+                      <input matInput type="text" formControlName="virtualPhysiotherapy">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Functional Fitness</mat-label>
+                      <input matInput type="text" formControlName="functionalFitness">
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Find A Therapist</mat-label>
+                      <input matInput type="text" formControlName="findATherapist">
+                    </mat-form-field>
+                    <span formGroupName="digitalMentalHealthTherapy">                
+                    <mat-form-field appearance="fill">
+                      <mat-label>Digital Mental Health Therapy</mat-label>
+                      <mat-select formControlName="digitalMentalHealthTherapyId">
+                        <mat-option *ngFor="let therapy of clientInfoDropDown.digitalMentalHealthTherapies" [value]="therapy.digitalMentalHealthTherapyId">
+                          {{ therapy.providerName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                   </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>EAP Portal Provider</mat-label>
+                      <input matInput type="text" formControlName="eapPortalProvider">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Improve Your Sleep EAP</mat-label>
+                      <input matInput type="text" formControlName="improveYourSleepEAP">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Free Resources to Help</mat-label>
+                      <input matInput type="text" formControlName="freeResourcesToHelp">
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Credit Counselling</mat-label>
+                      <input matInput type="text" formControlName="creditCounselling">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Home and Auto Marsh</mat-label>
+                      <input matInput type="text" formControlName="homeAndAutoMarsh">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Home and Auto Employer Provided</mat-label>
+                      <input matInput type="text" formControlName="homeAndAutoEmployerProvided">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Will Support</mat-label>
+                      <input matInput type="text" formControlName="willSupport">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Pet Insurance</mat-label>
+                      <input matInput type="text" formControlName="petInsurance">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Retiree Insurance</mat-label>
+                      <input matInput type="text" formControlName="retireeInsurance">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Discounts</mat-label>
+                      <input matInput type="text" formControlName="discounts">
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Vetster</mat-label>
+                      <mat-select formControlName="vetster">
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Tutoring</mat-label>
+                      <input matInput type="text" formControlName="tutoring">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Giving Back</mat-label>
+                      <input matInput type="text" formControlName="givingBack">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Caregiving</mat-label>
+                      <input matInput type="text" formControlName="caregiving">
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 1</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering1">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 2</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering2">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 3</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering3">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 4</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering4">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 5</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering5">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 6</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering6">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client Specific Offering 7</mat-label>
+                      <input matInput type="text" formControlName="clientSpecificOffering7">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet</mat-label>
+                      <input matInput type="text" formControlName="wellnessWallet">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet Carryover</mat-label>
+                      <input matInput type="text" formControlName="wellnessWalletCarryover">
+                    </mat-form-field>
+                  </div>
+                  <div class="section">
+                    <span formGroupName="payrollProcessingFrequency">                
+                    <mat-form-field appearance="fill">
+                      <mat-label>Payroll Processing Frequency</mat-label>
+                      <mat-select formControlName="payrollProcessingFrequencyId">
+                        <mat-option *ngFor="let frequency of clientInfoDropDown.payrollProcessingFrequencies" [value]="frequency.payrollProcessingFrequencyId">
+                          {{ frequency.frequency }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Quarterly Administrator Access Review</mat-label>
+                      <input matInput type="text" formControlName="quarterlyAdministratorAccessReview">
+                    </mat-form-field>
+                    <span formGroupName="payrollCalendar">                
+                      <mat-form-field appearance="fill">
+                        <mat-label>Payroll Calendar Update</mat-label>
+                        <mat-select formControlName="payrollCalendarId">
+                          <mat-option *ngFor="let payroll of clientInfoDropDown.payrollCalendars" [value]="payroll.payrollCalendarId">
+                            {{ payroll.calendarName }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                   </span>
+                    <mat-form-field appearance="fill">
+                      <mat-label>SA Toolkit Update</mat-label>
+                      <input matInput type="text" formControlName="saToolkitUpdate">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Campaign Renewal</mat-label>
+                      <input matInput type="text" formControlName="wellnessCampaignRenewal">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Wellness Wallet Reset Reload</mat-label>
+                      <input matInput type="text" formControlName="wellnessWalletResetReload">
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="section">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Allowed to communicate directly with employees via the portal?</mat-label>
+                      <mat-select formControlName="allowedToCommunicateDirectly">
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill" class="comment-field">
+                      <mat-label>Comments/Notes</mat-label>
+                      <textarea matInput formControlName="commentsNotes" rows="4"></textarea>
+                    </mat-form-field>
+                  </div>
+                 
+                </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </mat-tab>
+  
+      <mat-tab label="Mailing">
+        <ng-template matTabContent>
+          <mat-card >
+            <mat-card-title *ngIf="dataSource.data.length != 0">Mailing Information</mat-card-title>
+              <table *ngIf="dataSource.data.length != 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="contactName">
+                  <th mat-header-cell *matHeaderCellDef>Contact Name</th>
+                  <td mat-cell *matCellDef="let mail"> {{ mail.contactName || "N/A" }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="emailAddress">
+                  <th mat-header-cell *matHeaderCellDef>Email Address</th>
+                  <td mat-cell *matCellDef="let mail"> {{ mail.emailAddress || "N/A" }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="product">
+                  <th mat-header-cell *matHeaderCellDef>Product</th>
+                  <td mat-cell *matCellDef="let mail"> {{ mail.product ==1? 'Standard' : mail.product ==2 ? 'Lite' : 'N/A' }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="preferredLanguage">
+                  <th mat-header-cell *matHeaderCellDef>Language</th>
+                  <td mat-cell *matCellDef="let mail"> {{ mail.preferredLanguage==1 ? 'English' : mail.preferredLanguage == 2 ? 'French' : "N/A" }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="isOnMaternityLeave">
+                  <th mat-header-cell *matHeaderCellDef>On Maternity Leave</th>
+                  <td mat-cell *matCellDef="let mail"> {{ mail.isOnMaternityLeave ? "Yes" : mail.isOnMaternityLeave === false ? "No" : "N/A" }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef> Actions </th>
+                  <td mat-cell *matCellDef="let mail;let i = index">
+                    <button mat-icon-button  color="primary"  type="button" (click)="editMailing(i)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button  type="button" color="warn" (click)="deleteMailing(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedMailingColumns"></tr>
+                <tr mat-row *matRowDef="let mail; columns: displayedMailingColumns;" [hidden]="mail.isDeleted==true"></tr>
+              </table>
+          </mat-card>
+          <mat-card>
+            <mat-card-title #scroll>Create Mailing Information</mat-card-title>
+            <mat-card>
+              <mat-card-content>
+                <div formGroupName="mailing">
+                <mat-form-field appearance="fill">
+                  <mat-label>Contact Name</mat-label>
+                  <input matInput formControlName="contactName"  name="mailing.contactName">
+                </mat-form-field>
+           
+                <mat-form-field appearance="fill">
+                  <mat-label>Email Address</mat-label>
+                  <input matInput formControlName="emailAddress"  type="email"  name="mailing.emailAddress">
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Product</mat-label>
+                  <mat-select formControlName="product">
+                    <mat-option [value]="1">Standard</mat-option>
+                    <mat-option [value]="2">Lite</mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <span style="margin-left: 2%;">
+                  <label>Preferred Language:</label>
+                  <mat-radio-group style="margin-left: 5%;" formControlName="preferredLanguage">
+                    <mat-radio-button [value]="1">English</mat-radio-button>
+                    <mat-radio-button [value]="2">French</mat-radio-button>
+                  </mat-radio-group>
+                </span>
+  
+                <div>
+                  <mat-checkbox formControlName="isOnMaternityLeave">On Maternity Leave</mat-checkbox>
+                </div>
+                <div class="submit-button-container">
+                  <button mat-raised-button color="primary" type="button" (click)="addMailingForm()">{{buttonName}}</button>                </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <br />
+          </mat-card>
+        </ng-template>
+      </mat-tab>
+  
+      <mat-tab label="Schedule">
+        <ng-template matTabContent>
+          <mat-card >
+            <mat-card-title #scroll>Edit Schedule Information</mat-card-title>
+            <mat-card-content>
+              <mat-card>
+                <mat-card-content>
+                  <div formGroupName="scheduleDto">
+                  <span formGroupName="accountManager">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Account Manager</mat-label>
+                    <mat-select formControlName="userId" required name="scheduleDto.accountManager">
+                      <mat-option *ngFor="let manager of clientInfoDropDown.users" [value]="manager.userId">
+                        {{ manager.firstName + ' ' + manager.lastName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+  
+                  <mat-form-field appearance="fill">
+                    <mat-label>Go-Live Date</mat-label>
+                    <input matInput formControlName="goLiveDate" [matDatepicker]="scgoLiveDatePicker" name="scheduleDto.goLiveDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="scgoLiveDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #scgoLiveDatePicker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Cadence</mat-label>
+                    <mat-select formControlName="cadence" name="scheduleDto.cadence"  required>
+                      <mat-option [value]="1">Annual Aggregate Report</mat-option>
+                      <mat-option [value]="2">Semi-Annual</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="product" required>
+                      <mat-option [value]="1">Standard</mat-option>
+                      <mat-option [value]="2">Lite</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <span formGroupName="januaryCalenderType">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Jan</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="februaryCalenderType">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Feb</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                  <span formGroupName="marchCalenderType">
+                  <mat-form-field appearance="fill">
+                    <mat-label>March</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="aprilCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>April</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="mayCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>May</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                  <span formGroupName="juneCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>June</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </span>
+                <span formGroupName="julyCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>July</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="augustCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>August</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="septemberCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>September</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="octoberCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>October</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="novemberCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>November</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span formGroupName="decemberCalenderType">  
+                  <mat-form-field appearance="fill">
+                    <mat-label>December</mat-label>
+                    <mat-select formControlName="scheduleCalenderId">
+                      <mat-option *ngFor="let sc of  scheduleDropDown.scheduleCalender" [value]="sc.scheduleCalenderId">
+                        {{ sc.calenderType }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+               </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </mat-tab>
+  
+      <mat-tab label="Inflation Clause">
+        <ng-template matTabContent>
+          <mat-card >
+            <mat-card-title #scroll>Edit Schedule Information</mat-card-title>
+            <mat-card-content>
+              <mat-card>
+                <mat-card-content>
+                  <div formGroupName="inflationClauseDto">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Vendor Name</mat-label>
+                      <input matInput type="text" formControlName="vendorName" name="inflationClauseDto.vendorName" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Vendor Cost ($)</mat-label>
+                      <input matInput formControlName="vendorCost" type="number" name="inflationClauseDto.vendorCost" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Inflation Clauses</mat-label>
+                      <mat-select formControlName="isInflationClause" name="inflationClauseDto.isInflationClause" required>
+                        <mat-option [value]="true">Yes</mat-option>
+                        <mat-option [value]="false">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Clause</mat-label>
+                      <textarea matInput formControlName="clause" rows="1" name="inflationClauseDto.clause" required></textarea>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Effective Date of 1st Application</mat-label>
+                      <input matInput formControlName="effectiveDate1" [matDatepicker]="effcetiveplanPicker1" name="inflationClause.effectiveDate1" required>
+                      <mat-datepicker-toggle matSuffix [for]="effcetiveplanPicker1"></mat-datepicker-toggle>
+                      <mat-datepicker #effcetiveplanPicker1></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Date of 2nd Application</mat-label>
+                      <input matInput formControlName="effectiveDate2" [matDatepicker]="effcetiveplanPicker2">
+                      <mat-datepicker-toggle matSuffix [for]="effcetiveplanPicker2"></mat-datepicker-toggle>
+                      <mat-datepicker #effcetiveplanPicker2></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Date of 3rd Application</mat-label>
+                      <input matInput formControlName="effectiveDate3" [matDatepicker]="effcetiveplanPicker3">
+                      <mat-datepicker-toggle matSuffix [for]="effcetiveplanPicker3"></mat-datepicker-toggle>
+                      <mat-datepicker #effcetiveplanPicker3></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Notice Period</mat-label>
+                      <mat-select formControlName="noticePeriod">
+                        <mat-option [value]="1">30 days</mat-option>
+                        <mat-option [value]="2">90 days</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Old Monthly Flat Amount ($)</mat-label>
+                      <input matInput formControlName="oldMonthlyFlatAmount" type="number">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Old PEPM ($)</mat-label>
+                      <input matInput formControlName="oldPEPM" type="number">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>New Flat Amount ($)</mat-label>
+                      <input matInput formControlName="newFlatAmount" type="number">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>New PEPM ($)</mat-label>
+                      <input matInput formControlName="newPEPM" type="number">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Definition</mat-label>
+                      <textarea matInput formControlName="definition" rows="4"></textarea>
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="submit-button-container">
+      <button mat-raised-button color="primary" type="submit">Update</button>
+    </div>
+  </form>
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading..</p>
+    </div>
+  </ng-template>
